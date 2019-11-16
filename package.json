@@ -15,8 +15,8 @@
     "lint": "run-p lint:prettier lint:eslint",
     "lint:prettier": "prettier -l '**/*.ts'",
     "lint:eslint": "eslint '**/*.ts'",
-    "run": "node ./index.js",
-    "start": "run-s build run",
+    "prepare": "yarn build",
+    "start": "node ./index.js",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {

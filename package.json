@@ -8,12 +8,15 @@
     "node": "~10"
   },
   "scripts": {
+    "build": "tsc -p .",
     "format": "run-s format:prettier format:eslint",
     "format:prettier": "prettier --write '**/*.ts'",
     "format:eslint": "eslint --fix '**/*.ts'",
     "lint": "run-p lint:prettier lint:eslint",
     "lint:prettier": "prettier -l '**/*.ts'",
     "lint:eslint": "eslint '**/*.ts'",
+    "run": "node ./index.js",
+    "start": "run-s build run",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {

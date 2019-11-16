@@ -1,0 +1,7 @@
+{
+  "name": "@flywheel-jp/bookshelf",
+  "version": "0.0.0",
+  "description": "GCS proxy running on GAE for internal document sharing",
+  "author": "Yuku Takahashi <yuku@flywheel.jp>",
+  "private": true
+}

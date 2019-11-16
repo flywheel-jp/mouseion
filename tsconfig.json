@@ -1,3 +1,26 @@
 {
-  "extends": "@flywheel-jp/tsconfig"
+  "compilerOptions": {
+    // Compatible with Node.js v10
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018"],
+
+    // Copy from @flywheel-jp/tsconfig
+    // Since @flywheel-jp/tsconfig is for Node.js >=12, bookshelf cannot use it.
+    "skipLibCheck": true,
+    "useDefineForClassFields": true,
+    "sourceMap": false, // fixed
+    "declaration": false, // fixed
+    "pretty": true,
+    "newLine": "lf",
+    "stripInternal": true,
+    "esModuleInterop": true,
+    // Strict Type-Checking options
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noEmitOnError": true
+  }
 }

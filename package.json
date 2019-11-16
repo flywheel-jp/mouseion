@@ -4,6 +4,9 @@
   "description": "GCS proxy running on GAE for internal document sharing",
   "author": "Yuku Takahashi <yuku@flywheel.jp>",
   "private": true,
+  "engines": {
+    "node": "~10"
+  },
   "scripts": {
     "format": "run-s format:prettier format:eslint",
     "format:prettier": "prettier --write '**/*.ts'",
@@ -18,7 +21,6 @@
   },
   "devDependencies": {
     "@flywheel-jp/prettier-config": "^0.1.1",
-    "@flywheel-jp/tsconfig": "^0.1.2",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
     "@typescript-eslint/parser": "^2.7.0",
     "eslint": "^6.6.0",

@@ -23,11 +23,6 @@
   resolved "https://registry.yarnpkg.com/@flywheel-jp/prettier-config/-/prettier-config-0.1.1.tgz#0acfa92891868ce0591920e5c4903f7460fdffc9"
   integrity sha512-IpUyFH4V64BAaHY98Ebmm7t4lU0Sm/CjHbP++ixYH23yW2bAlVGMYTGwWXXcKMpvZchPMFe25iuGEkmMWHIG8Q==
 
-"@flywheel-jp/tsconfig@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@flywheel-jp/tsconfig/-/tsconfig-0.1.2.tgz#0b3c2d42bca00dd2930ead4c455cf0951327d2cb"
-  integrity sha512-Ij0Lf01NWJc79xah/0u6apHJWXl6SmgpjZGYaAd2iQgNY1VXGCHh1478dL20GqW16THFEVu0e9HQEdN3UVbqUQ==
-
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"

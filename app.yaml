@@ -1,1 +1,3 @@
 runtime: nodejs10
+env_variables:
+  GCLOUD_STORAGE_BUCKET: flywheel-bookshelf

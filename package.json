@@ -20,6 +20,7 @@
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
+    "@google-cloud/storage": "^4.1.2",
     "@types/express": "^4.17.2",
     "express": "^4.17.1",
     "typescript": "^3.7.2"

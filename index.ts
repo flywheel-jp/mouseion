@@ -1,7 +1,7 @@
 import path from "path"
 
-import express from "express"
-import { Storage } from "@google-cloud/storage"
+import express, { Response, Request } from "express"
+import { Storage, File } from "@google-cloud/storage"
 
 const PORT = Number(process.env.PORT) || 8080
 const bucketName = process.env.GCLOUD_STORAGE_BUCKET
@@ -30,36 +30,39 @@ const isGoogleError = (e: any): e is GoogleError => {
   )
 }
 
-/**
- * Mouseion index page. List all documents.
- */
-app.get("/", async (_, responseWriter) => {
+const stripTrailingSlash = (str: string): string =>
+  str.endsWith("/") ? str.slice(0, -1) : str
+
+const renderIndexPage = async (
+  request: Request,
+  responseWriter: Response
+): Promise<void> => {
+  const path = stripTrailingSlash(request.url)
+
+  const prefix = path === "" ? "" : path.substring(1) + "/"
   const response = await bucket.getFiles({
     autoPaginate: false,
-    delimiter: "/"
+    delimiter: "/",
+    prefix
   })
   const files = response[0]
   const apiResponse = response[2]
+  const prefixes = apiResponse?.prefixes ?? []
 
-  responseWriter.render("index", {
-    fileNames: files.map(f => f.name),
-    prefixes: apiResponse?.prefixes ?? []
-  })
-})
-
-/**
- * Proxy for individual files.
- */
-app.get("/*", async (req, res) => {
-  const name = req.url.substring(1)
-
-  let file = bucket.file(name)
-  const [exists] = await file.exists()
-  if (!exists) {
-    // If there isn't a file with the given name, treat it as a directory.
-    file = bucket.file(path.join(name, "index.html"))
+  if (files.length === 0 && prefixes.length === 0) {
+    responseWriter.status(404)
+    responseWriter.send("Not Found")
+    return
   }
 
+  responseWriter.render("index", {
+    path,
+    fileNames: files.filter(f => f.name !== prefix).map(f => f.name),
+    prefixes: apiResponse?.prefixes ?? []
+  })
+}
+
+const renderSingleFile = async (file: File, res: Response): Promise<void> => {
   file
     .createReadStream()
     .on("error", e => {
@@ -73,6 +76,41 @@ app.get("/*", async (req, res) => {
     })
     .on("end", () => res.end())
     .pipe(res)
+}
+
+/**
+ * Route for GET requests ending with a slash.
+ */
+app.get("/", renderIndexPage)
+
+/**
+ * Route for other GET requests.
+ */
+app.get("/*", async (req, res) => {
+  const name = req.url.substring(1)
+
+  if (name !== "" && !name.endsWith("/")) {
+    // Check if there is a file with the given file name
+    const exactFile = bucket.file(name)
+    const [exactFileExists] = await exactFile.exists()
+    if (exactFileExists) {
+      renderSingleFile(exactFile, res)
+      return
+    }
+  }
+
+  // From this line, the name is considered as a directory name.
+
+  // Check if there is a index.html in the directory.
+  const indexFile = bucket.file(path.join(name, "index.html"))
+  const [indexFileExists] = await indexFile.exists()
+  if (indexFileExists) {
+    renderSingleFile(indexFile, res)
+    return
+  }
+
+  // Show all files in the directory.
+  renderIndexPage(req, res)
 })
 
 app.listen(PORT, () => {

@@ -10,11 +10,14 @@ if (!bucketName) {
 }
 
 const app = express()
+app.set("view engine", "pug")
+app.set("views", "./views")
+
 const storage = new Storage()
 const bucket = storage.bucket(bucketName)
 
-app.get("/", (_, res) => {
-  res.send("This is flywheel-jp/mouseion.")
+app.get("/", async (_, res) => {
+  res.render("index")
 })
 
 app.get("/sample", async (_, res) => {

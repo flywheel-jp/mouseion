@@ -36,3 +36,7 @@ yarn docsify serve docs
 ```
 
 Now open http://localhost:3000 in your browser.
+
+## Deployment
+
+Every push to `master` branch will deploy a new version of this app. Deploys happen automatically.

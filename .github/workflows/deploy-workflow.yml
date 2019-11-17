@@ -1,4 +1,4 @@
-name: Deploy mouseion to GAE and upload documents to GCS
+name: Deploy and upload
 on:
   push:
     branches:

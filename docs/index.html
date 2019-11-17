@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>@flywheel-jp/mouseion - GCS proxy running on GAE for internal document sharing</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="GCS proxy running on GAE for internal document sharing">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    mermaid.initialize({ startOnLoad: false });
+
+    window.$docsify = {
+      name: "@flywheel-jp/mouseion",
+      repo: "https://github.com/flywheel-jp/mouseion",
+      themeColor: "#171b61",
+      loadSidebar: true,
+      subMaxLevel: 3,
+      markdown: {
+        renderer: {
+          code: (function () {
+            var mermaidIndex = 0;
+            return function (code, lang) {
+              if (lang === "mermaid") {
+                return (
+                  '<div class="mermaid">' + mermaid.render('mermaid-svg-' + mermaidIndex++, code) + "</div>"
+                );
+              }
+              return this.origin.code.apply(this, arguments);
+            }
+          })()
+        }        
+      }
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+</body>
+</html>

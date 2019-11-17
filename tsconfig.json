@@ -6,7 +6,7 @@
     "lib": ["es2018"],
 
     // Copy from @flywheel-jp/tsconfig
-    // Since @flywheel-jp/tsconfig is for Node.js >=12, bookshelf cannot use it.
+    // Since @flywheel-jp/tsconfig is for Node.js >=12, mouseion cannot use it.
     "skipLibCheck": true,
     "useDefineForClassFields": true,
     "sourceMap": false, // fixed

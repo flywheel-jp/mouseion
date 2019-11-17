@@ -14,7 +14,7 @@ const storage = new Storage()
 const bucket = storage.bucket(bucketName)
 
 app.get("/", (_, res) => {
-  res.send("This is flywheel-jp/bookshelf.")
+  res.send("This is flywheel-jp/mouseion.")
 })
 
 app.get("/sample", async (_, res) => {

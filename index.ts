@@ -74,6 +74,9 @@ const renderSingleFile = async (file: File, res: Response): Promise<void> => {
         res.send("Internal server error")
       }
     })
+    .on("response", response => {
+      res.setHeader("content-type", response.headers["content-type"])
+    })
     .on("end", () => res.end())
     .pipe(res)
 }

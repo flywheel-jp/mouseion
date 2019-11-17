@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail -o posix
+
+if [ ! -f .env ]; then
+  echo "cp .env.sample .env"
+  cp .env.sample .env
+fi
+
+echo "yarn install"
+yarn install

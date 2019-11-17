@@ -8,6 +8,7 @@
     "node": "~10"
   },
   "scripts": {
+    "dev": "ts-node -r dotenv/config ./index.ts",
     "format": "run-s format:prettier format:eslint",
     "format:prettier": "prettier --write '**/*.ts'",
     "format:eslint": "eslint --fix '**/*.ts'",
@@ -16,7 +17,6 @@
     "lint:prettier": "prettier -l '**/*.ts'",
     "lint:eslint": "eslint '**/*.ts'",
     "start": "node ./index.js",
-    "start:dev": "ts-node -r dotenv/config ./index.ts",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {

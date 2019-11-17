@@ -7,3 +7,10 @@ html(lang="en")
     title FLYWHEEL Mouseion
   body
     h1 FLYWHEEL Mouseion
+    ul
+      each fileName in fileNames
+        li
+          a(href="/" + fileName)= fileName
+      each prefix in prefixes
+        li
+          a(href="/" + prefix + "index.html")= prefix

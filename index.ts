@@ -16,8 +16,18 @@ app.set("views", "./views")
 const storage = new Storage()
 const bucket = storage.bucket(bucketName)
 
-app.get("/", async (_, res) => {
-  res.render("index")
+app.get("/", async (_, responseWriter) => {
+  const response = await bucket.getFiles({
+    autoPaginate: false,
+    delimiter: "/"
+  })
+  const files = response[0]
+  const apiResponse = response[2]
+
+  responseWriter.render("index", {
+    fileNames: files.map(f => f.name),
+    prefixes: apiResponse?.prefixes ?? []
+  })
 })
 
 app.get("/sample", async (_, res) => {

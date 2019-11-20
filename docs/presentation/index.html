@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction toMouseion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .footnote { font-size: 0.8rem; }
+      .footnote::before {
+        content: "*";
+        margin-right: 4px;
+      }
+      .mermaid { text-align: center; }
+      #slide-title { background: #171b61; color: white; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source"></textarea>
+    <div id="svgContainer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js"></script>
+    <script type="text/javascript">
+      ;(function() {
+        mermaid.initialize({ startOnLoad: false })
+
+        const svgContainer = document.getElementById("svgContainer")
+        const rendered = "mermaid-rendered"
+        let counter = 0
+
+        function renderMermaid() {
+          const els = document.querySelectorAll(".remark-visible .mermaid")
+          for (const el of els) {
+            if (el.hasAttribute(rendered)) {
+              continue
+            }
+
+            const graphDefinition = el.textContent
+            mermaid.render("graphDiv" + counter++, graphDefinition, (svgCode) => {
+              el.innerHTML = svgCode
+              el.setAttribute(rendered, true)
+            })
+          }
+        }
+
+        fetch("./slide.md").then(resp => {
+          resp.text().then(text => {
+            document.getElementById("source").innerHTML = text
+            const slide = remark.create({
+              ratio: "16:9",
+              // highlightStyle: "monokai"
+            })
+            slide.on("afterShowSlide", () => {
+              renderMermaid()
+            })
+            renderMermaid()
+          })
+        })
+      })()
+    </script>
+  </body>
+</html>

@@ -20,11 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: GCP Authenticate
-        uses: actions/gcloud/auth@master
-        env:
-          GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
-      - name: Upload documents to flywheel-mouseion bucket
-        uses: docker://gcr.io/cloud-builders/gsutil
+      - uses: flywheel-jp/mouseion/upload@master
         with:
-          args: -m rsync -d -r docs gs://flywheel-mouseion/mouseion
+          service-account-key: ${{ secrets.GCLOUD_AUTH }}
+          namespace: mouseion

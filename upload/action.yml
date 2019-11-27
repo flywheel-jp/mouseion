@@ -1,0 +1,20 @@
+name: 'Mouseion'
+description: 'Upload documents to FLYWHEEL Mouseion'
+inputs:
+  service-account-key:
+    description: 'Base64 encoded service account key exported as JSON'
+    required: true
+  source:
+    description: 'Path to documents directory'
+    required: false
+    default: 'docs'
+  namespace:
+    description: 'Document namespace in FLYWHEEL Mouseion'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.service-account-key }}
+    - ${{ inputs.source }}
+    - ${{ inputs.namespace }}

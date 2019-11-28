@@ -101,4 +101,5 @@ public/
 # End of https://www.gitignore.io/api/node,appengine
 
 src/**/*.js
+tmp
 .env

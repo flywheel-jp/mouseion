@@ -1,15 +1,19 @@
 name: 'Mouseion'
-description: 'Upload documents to FLYWHEEL Mouseion'
+description: 'Upload documents to Mouseion'
 inputs:
   service-account-key:
     description: 'Base64 encoded service account key exported as JSON'
     required: true
+  bucket:
+    description: 'GCS bucket name'
+    required: false
+    default: 'flywheel-mouseion'
   source:
     description: 'Path to documents directory'
     required: false
     default: 'docs'
   namespace:
-    description: 'Document namespace in FLYWHEEL Mouseion'
+    description: 'Document namespace in Mouseion'
     required: true
 runs:
   using: 'docker'
@@ -18,3 +22,4 @@ runs:
     - ${{ inputs.service-account-key }}
     - ${{ inputs.source }}
     - ${{ inputs.namespace }}
+    - ${{ inputs.bucket }}

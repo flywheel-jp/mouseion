@@ -1,9 +1,9 @@
 
-# @flywheel-jp/mouseion
+# Mouseion
 
-![](https://github.com/flywheel-jp/mouseion/workflows/Deploy%20and%20upload/badge.svg) ![](https://github.com/flywheel-jp/mouseion/workflows/Test/badge.svg)
+![](https://github.com/flywheel-jp/mouseion/workflows/Test/badge.svg)
 
-> GCS proxy running on GAE for internal document sharing.
+> Internal document sharing system for [FLYWHEEL](https://flywheel.jp).
 
 ## Development
 

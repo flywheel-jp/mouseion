@@ -102,4 +102,3 @@ public/
 
 src/**/*.js
 tmp
-.env

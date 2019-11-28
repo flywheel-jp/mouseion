@@ -18,7 +18,7 @@ const app = express()
 
 // Use pug
 app.set("view engine", "pug")
-app.set("views", "./views")
+app.set("views", "./src/appengine/views")
 
 const storage = new Storage()
 const bucket = storage.bucket(bucketName)

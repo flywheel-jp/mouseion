@@ -8,7 +8,7 @@
     "node": "~10"
   },
   "scripts": {
-    "dev": "ts-node -r dotenv/config ./index.ts",
+    "dev": "ts-node -r dotenv/config ./src/appengine/main.ts",
     "format": "run-s format:prettier format:eslint",
     "format:prettier": "prettier --write '**/*.ts'",
     "format:eslint": "eslint --fix '**/*.ts'",
@@ -16,7 +16,7 @@
     "lint": "run-p lint:prettier lint:eslint",
     "lint:prettier": "prettier -l '**/*.ts'",
     "lint:eslint": "eslint '**/*.ts'",
-    "start": "node ./index.js",
+    "start": "node ./src/appengine/main.js",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {

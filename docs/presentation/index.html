@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Introduction toMouseion</title>
+    <title>Brief Introduction to Mouseion</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css"/>
     <style type="text/css">
@@ -19,7 +19,7 @@
         content: "*";
         margin-right: 4px;
       }
-      .mermaid { text-align: center; }
+      div.mermaid { text-align: center; }
       #slide-title { background: #171b61; color: white; }
     </style>
   </head>
@@ -37,7 +37,7 @@
         let counter = 0
 
         function renderMermaid() {
-          const els = document.querySelectorAll(".remark-visible .mermaid")
+          const els = document.querySelectorAll(".remark-visible div.mermaid")
           for (const el of els) {
             if (el.hasAttribute(rendered)) {
               continue

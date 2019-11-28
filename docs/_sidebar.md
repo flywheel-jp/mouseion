@@ -1,4 +1,4 @@
 * [README](/)
 * [ARCHITECTURE](/architecture.md)
 * Slide
-    * [Brief Intro to Mouseion](./presentation/index.html ':ignore')
+    * [Brief Intro to Mouseion](/mouseion/presentation/index.html ':ignore')

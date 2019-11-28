@@ -8,10 +8,11 @@ name: title
 # Agenda
 
 1. What it is
-2. Motivation and Philosophy
-3. Architecture
-4. Publishing Documents
-5. Tools
+2. Motivation
+3. Philosophy
+4. Architecture
+5. Publishing Documents
+6. Tools
 
 ---
 
@@ -21,33 +22,61 @@ name: title
 
 By using the Mouseion, we can easily and securely share any kind of files with users in the `@flywheel.jp` domain.
 
+In short, if you put a file as gs://flywheel-mouseion/foo/bar/baz, we can access it as https://flywheel-mouseion.appspot.com/foo/bar/baz.
+
 .footnote[The **Mouseion at Alexandria** was the home of music or poetry, a philosophical school and library such as Plato's Academy, also a storehouse of texts. This original word was the source for the modern usage of the word museum.]
 
 ---
 
-# Movitation and Philosophy
+# Movitation
 
-* Maintain our documents.
-    * FLYWHEEL uses Google Document to write a lot of documents, but unfortunately many are left unmaintained.
-    * Documents that are strongly related to the source code should be stored in the corresponding git repository and updated as the source code changes.
+Maintain our documents:
+
+* FLYWHEEL uses Google Document to write a lot of documents, but unfortunately many are left unmaintained.
+* Documents that are strongly related to the source code should be stored in the corresponding git repository and updated as the source code changes.
+
+---
+
+# Philosophy
+
 * Use the Web standard technology.
     * FLYWHEEL uses a variety of programming languages and tools, so I didn't want to create a system that was easy to use for a particular project.
 * Publish from CI.
     * Don't upload documents from your terminal.
 
 ---
+
+# Architecture
+
+<div class="mermaid">
+graph LR
+    Browser --> IAP
+    subgraph GCP: flywheel-mouseion
+        IAP[Cloud IAP] --> GAE
+        GAE --> GCS
+    end
+</div>
+
+Mouseion consists of three components running in the `flywheel-mouseion` GCP project:
+
+1. [Cloud Identity-Aware Proxy (Cloud IAP)](https://console.cloud.google.com/security/iap?project=flywheel-mouseion) controls access to our GAE application. Only users belonging to `flywheel.jp` domain are allowed to access the application.
+2. [Google App Engine (GAE)](https://console.cloud.google.com/appengine?project=flywheel-mouseion) proxies GCS. [flywheel-jp/mouseion](https://github.com/flywheel-jp/mouseion) repository mainly contains its source code.
+3. [Google Cloud Storage (GCS)](https://console.cloud.google.com/storage/browser/flywheel-mouseion/?project=flywheel-mouseion) stores documents.
+
+---
+class: center, middle
+
 # Publishing Documents
+
+---
+## In general
 
 1. Create a [service account](https://console.cloud.google.com/iam-admin/serviceaccounts?project=flywheel-mouseion) with the "Storage Object Admin" role.
 3. Authenticate gcloud SDK.
 4. Upload files to flywheel-mouseion GCS bucket as the service account.
 
-```bash
-gsutil -m rsync -d -r path/to/dir gs://flywheel-mouseion/NAMESPACE
-```
-
 ---
-## GitHub Actions
+## GitHub Actions (Recommended)
 
 Register Base64 encoded service account key exported as JSON as `GCLOUD_AUTH`:
 
@@ -63,24 +92,28 @@ on:
     branches:
       - master
 jobs:
-  upload:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: GCP Authenticate
-        uses: actions/gcloud/auth@master
-        env:
-          GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
-      - name: Publish documents to flywheel-mouseion bucket
-        uses: docker://gcr.io/cloud-builders/gsutil
+      - uses: flywheel-jp/mouseion/upload@master
         with:
-          args: -m rsync -d -r path/to/dir gs://flywheel-mouseion/NAMESPACE
+          service-account-key: ${{ secrets.GCLOUD_AUTH }}
+          source: path/to/dir
+          namespace: repository-name
+```
+
+---
+## Manual
+
+```bash
+gsutil -m rsync -d -r path/to/dir gs://flywheel-mouseion/NAMESPACE
 ```
 
 ---
 ## CircleCI
 
-Register a raw service account key exported as JSON as `GCLOUD_AUTH` then:
+Register Base64 encoded service account key exported as JSON as `GCLOUD_AUTH`:
 
 ```yaml
 version: 2.1
@@ -90,28 +123,9 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
-      - run: echo $GCLOUD_AUTH | gcloud auth activate-service-account --key-file=-
+      - run: echo $GCLOUD_AUTH | base64 --decode | gcloud auth activate-service-account --key-file=-
       - run: gsutil -m rsync -d -r path/to/dir gs://flywheel-mouseion/NAMESPACE
 ```
-
----
-
-# Architecture
-
-<div class="mermaid">
-graph LR
-    Browser --> IAP
-    subgraph GCP: flywheel-mouseion
-        IAP[Cloud IAP] --> GAE
-        GAE --> GCS[GCS<br/>gs://flywheel-mouseion]
-    end
-</div>
-
-Mouseion consists of three components running in the `flywheel-mouseion` GCP project:
-
-1. [Cloud Identity-Aware Proxy (Cloud IAP)](https://console.cloud.google.com/security/iap?project=flywheel-mouseion) controls access to our GAE application. Only users belonging to `flywheel.jp` domain are allowed to access the application.
-2. [Google App Engine (GAE)](https://console.cloud.google.com/appengine?project=flywheel-mouseion) proxies GCS. [flywheel-jp/mouseion](https://github.com/flywheel-jp/mouseion) repository mainly contains its source code.
-3. [Google Cloud Storage (GCS)](https://console.cloud.google.com/storage/browser/flywheel-mouseion/?project=flywheel-mouseion) stores documents.
 
 ---
 class: center, middle
@@ -152,3 +166,28 @@ and create a `README.md` to the same directory.
 ## remark
 
 This presentation is generated by [remark](https://remarkjs.com/).
+
+---
+## mermaid
+
+[Mermaid](https://mermaid-js.github.io/mermaid/) generates diagrams, charts, graphs or flows from markdown-like text via javascript.
+
+```mermaid
+graph LR
+    Browser --> IAP[Cloud IAP]
+    subgraph GCP: flywheel-mouseion
+        IAP --> GAE
+        GAE --> GCS
+    end
+```
+
+becomes
+
+<div class="mermaid">
+graph LR
+    Browser --> IAP[Cloud IAP]
+    subgraph GCP: flywheel-mouseion
+        IAP --> GAE
+        GAE --> GCS
+    end
+</div>

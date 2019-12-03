@@ -1,6 +1,6 @@
 # GitHub Action for FLYWHEEL Mouseion
 
-This action uploads documents to FLYWHEEL Mouseion.
+This action uploads documents to Mouseion.
 
 ## Inputs
 
@@ -12,11 +12,15 @@ Example on encoding from a terminal: `base64 ~/<account_id>.json`.
 
 ### `namespace`
 
-**Required**: Document namespace in FLYWHEEL Mouseion.
+**Required**: Document namespace in Mouseion.
 
 ### `source`
 
 Path to documents directory. Default `"docs"`.
+
+### `bucket`
+
+GCS bucket name. Default `"flywheel-mouseion"`.
 
 ## Example usage
 
@@ -34,6 +38,7 @@ jobs:
       - uses: flywheel-jp/mouseion/upload@master
         with:
           service-account-key: ${{ secrets.GCLOUD_AUTH }}
+          bucket: your-mouseion
           source: path/to/dir
           namespace: repository-name
 ```

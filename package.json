@@ -12,15 +12,16 @@
     "format": "run-s format:prettier format:eslint",
     "format:prettier": "prettier --write '**/*.ts'",
     "format:eslint": "eslint --fix '**/*.ts'",
-    "gcp-build": "tsc -p .",
+    "gcp-build": "cp .env.sample .env && tsc -p .",
     "lint": "run-p lint:prettier lint:eslint",
     "lint:prettier": "prettier -l '**/*.ts'",
     "lint:eslint": "eslint '**/*.ts'",
-    "start": "node ./src/appengine/main.js",
+    "start": "node -r dotenv/config ./src/appengine/main.js",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
     "@google-cloud/storage": "^4.1.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pug": "^2.0.4"
   },
@@ -30,7 +31,6 @@
     "@typescript-eslint/eslint-plugin": "^2.7.0",
     "@typescript-eslint/parser": "^2.7.0",
     "docsify-cli": "^4.3.0",
-    "dotenv": "^8.2.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",

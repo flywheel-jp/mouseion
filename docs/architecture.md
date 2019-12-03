@@ -2,10 +2,10 @@
 
 ```mermaid
 graph LR
-  Browser --> IAP
+  Browser --> IAP[Cloud IAP]
   subgraph GCP: flywheel-mouseion
-    IAP[Cloud IAP] --> GAE
-    GAE --> GCS[GCS<br/>gs://flywheel-mouseion]
+    IAP --> GAE
+    GAE --> GCS
   end
 ```
 

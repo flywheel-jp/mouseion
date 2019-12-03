@@ -31,8 +31,8 @@ export default async (
   }
 
   responseWriter.render("index", {
-    path,
     fileNames: files.filter(f => f.name !== prefix).map(f => f.name),
-    prefixes: apiResponse?.prefixes ?? []
+    prefixes: apiResponse?.prefixes ?? [],
+    title: process.env.SITE_TITLE || "Mouseion"
   })
 }

@@ -6,5 +6,8 @@ if [ ! -f .env ]; then
   cp .env.sample .env
 fi
 
+echo "nodenv install --skip-existing"
+nodenv install --skip-existing
+
 echo "yarn install"
 yarn install

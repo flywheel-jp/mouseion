@@ -2,6 +2,7 @@
 # Mouseion
 
 ![](https://github.com/flywheel-jp/mouseion/workflows/Test/badge.svg)
+[![flywheel-standard](https://img.shields.io/badge/FLYWHEEL-Standard-171b61.svg?style=flat-square)](https://github.com/flywheel-jp/flywheel-standard)
 
 > Internal document sharing system for [FLYWHEEL](https://flywheel.jp).
 
@@ -9,7 +10,11 @@
 
 ### Setup
 
-Run `bin/setup` to setup local development environment:
+Because this project adheres to [the Flywheel Standard](https://github.com/flywheel-jp/flywheel-standard),
+first of all, your machine needs following the setup sequence described in
+[its README](https://github.com/flywheel-jp/flywheel-standard/blob/master/README.md#setup).
+
+Then run:
 
 ```bash
 bin/setup

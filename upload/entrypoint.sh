@@ -13,8 +13,7 @@ if [ ! -d "$source" ] ; then
 fi
 
 if [ -z "$namespace" ] ; then
-  echo "namespace parameter is required"
-  exit 1
+  namespace="${GITHUB_REPOSITORY#*/}"
 fi
 
 if [ -z "$bucket" ] ; then

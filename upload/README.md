@@ -40,5 +40,4 @@ jobs:
           service-account-key: ${{ secrets.GCLOUD_AUTH }}
           bucket: your-mouseion
           source: path/to/dir
-          namespace: repository-name
 ```

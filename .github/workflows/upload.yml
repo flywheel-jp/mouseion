@@ -10,4 +10,3 @@ jobs:
       - uses: flywheel-jp/mouseion/upload@master
         with:
           service-account-key: ${{ secrets.GCLOUD_AUTH }}
-          namespace: mouseion

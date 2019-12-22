@@ -67,9 +67,9 @@ Mouseion consists of three components running in the `flywheel-mouseion` GCP pro
 
 We strongly recommend uploading documents from CI.
 
-1. Ask a project admin to register a service account.
-    * The admin may use `bin/register-service-account` command to do the job.
-2. Add a workflow to your repository (next slide).
+1. Ask a GCP project admin to register a service account.
+    * The admin may use `bin/register-service-account` command to register a service account key as `GCLOUD_AUTH` secret of your repository.
+2. Add a workflow to your repository.
 
     ```yaml
     name: Upload to Mouseion
@@ -84,8 +84,6 @@ We strongly recommend uploading documents from CI.
           - uses: flywheel-jp/mouseion/upload@master
             with:
               service-account-key: ${{ secrets.GCLOUD_AUTH }}
-              source: path/to/dir
-              namespace: repository-name
     ```
 
 3. Commit documents.

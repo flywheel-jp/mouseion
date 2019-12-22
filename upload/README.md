@@ -12,7 +12,7 @@ Example on encoding from a terminal: `base64 ~/<account_id>.json`.
 
 ### `namespace`
 
-**Required**: Document namespace in Mouseion.
+Document namespace in Mouseion. Default is the name of the repository.
 
 ### `source`
 

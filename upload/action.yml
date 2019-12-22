@@ -14,7 +14,8 @@ inputs:
     default: 'docs'
   namespace:
     description: 'Document namespace in Mouseion'
-    required: true
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'

@@ -10,7 +10,7 @@
 
 ### Setup
 
-Because this project adheres to [the Flywheel Standard](https://github.com/flywheel-jp/flywheel-standard),
+Because this project adheres to [the FLYWHEEL Standard](https://github.com/flywheel-jp/flywheel-standard),
 first of all, your machine needs following the setup sequence described in
 [its README](https://github.com/flywheel-jp/flywheel-standard/blob/master/README.md#setup).
 
@@ -22,7 +22,7 @@ bin/setup
 
 ### Start Development Server
 
-At first, you need to install gcloud SDK and log in with a GCP account that has permissions on the `flywheel-mouseion` project.
+At first, you need to install gcloud SDK and log in with a GCP account that has permissions on the associated project. When it comes to FLYWHEEL, it is `flywheel-mouseion` project.
 
 Then run `yarn dev` to start local server:
 

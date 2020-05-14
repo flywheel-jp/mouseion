@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
  * Route for other GET requests.
  */
 app.get("/*", async (req, res) => {
-  const name = req.url.substring(1) // remove heading slash char
+  const name = req.path.substring(1) // remove heading slash char
 
   if (name !== "" && !name.endsWith("/")) {
     // Check if there is a file with the given file name

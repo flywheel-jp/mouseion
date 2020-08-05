@@ -7,7 +7,7 @@ export default async (
   request: Request,
   responseWriter: Response,
   {
-    bucket
+    bucket,
   }: {
     bucket: Bucket
   }
@@ -18,7 +18,7 @@ export default async (
   const response = await bucket.getFiles({
     autoPaginate: false,
     delimiter: "/",
-    prefix
+    prefix,
   })
   const files = response[0]
   const apiResponse = response[2]
@@ -33,6 +33,6 @@ export default async (
   responseWriter.render("index", {
     fileNames: files.filter(f => f.name !== prefix).map(f => f.name),
     prefixes: apiResponse?.prefixes ?? [],
-    title: process.env.SITE_TITLE || "Mouseion"
+    title: process.env.SITE_TITLE || "Mouseion",
   })
 }

@@ -1,4 +1,4 @@
-import { Response, Request } from "express"
+import { Response, Request } from "express-serve-static-core"
 import { Bucket } from "@google-cloud/storage"
 
 import stripTrailingSlash from "../utils/stripTrailingSlash"

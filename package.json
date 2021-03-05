@@ -23,7 +23,7 @@
     "@google-cloud/storage": "^5.1.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "pug": "^3.0.0"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "@flywheel-jp/prettier-config": "^0.2.1",

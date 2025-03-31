@@ -6,7 +6,7 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: flywheel-jp/mouseion/upload@master
+      - uses: actions/checkout@50fbc622fc4ef5163becd7fab6573eac35f8462e # v1.2.0
+      - uses: flywheel-jp/mouseion/upload@14e25daa2992c8a755ec2c31b43add6b576c1853 # master as of 2025-03-31
         with:
           service-account-key: ${{ secrets.GCLOUD_AUTH }}
